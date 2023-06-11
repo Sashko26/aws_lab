@@ -13,8 +13,3 @@ COPY style.css /usr/share/nginx/html
 
 # Встановлюємо пакет curl
 RUN apt-get update && apt-get install -y curl
-
-
-# Встановлюємо Watchtower
-RUN apk add --no-cache curl
-RUN curl -L https://github.com/containrrr/watchtower/releases/download/v1.4.0/watchtower-linux-amd64 -o /usr/bin/watchtower && chmod +x /usr/bin/watchtower
