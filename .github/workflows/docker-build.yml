@@ -60,3 +60,10 @@ jobs:
           context: .
           push: true
           tags: sashkoklapan/aws_lab_web:latest
+          
+      - name: Set up AWS CLI
+         uses: aws-actions/configure-aws-credentials@v1
+         with:
+           aws-access-key-id: AKIARG6QCKANY37TZBIJ
+           aws-secret-access-key: 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
+           aws-region: us-east-1
