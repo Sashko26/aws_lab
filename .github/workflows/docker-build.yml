@@ -70,7 +70,7 @@ jobs:
 
       - name: Deploy to AWS EC2 Instance
         run: |
-          ls "/home/runner/work/aws_lab/"
+          ls "/home/runner/work/aws_lab/aws_lab"
           ssh -i ${{ github.workspace }}/../last.pem ubuntu@ec2-44-211-125-30.compute-1.amazonaws.com 'docker pull sashkoklapan/aws_lab_web:latest'
           ssh -i ${{ github.workspace }}/../last.pem ubuntu@ec2-44-211-125-30.compute-1.amazonaws.com 'docker stop aws_lab_web_1'
           ssh -i ${{ github.workspace }}/../last.pem ubuntu@ec2-44-211-125-30.compute-1.amazonaws.com 'docker rm aws_lab_web_1'
