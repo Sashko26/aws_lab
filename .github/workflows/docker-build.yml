@@ -64,13 +64,13 @@ jobs:
       - name: Set up AWS CLI
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: AKIARG6QCKANY37TZBIJ
-          aws-secret-access-key: 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
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
-          
-       - name: Deploy to AWS EC2 Instance
-         run: |
-           ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@ec2-44-211-125-30.compute-1.amazonaws.com 'docker pull sashkoklapan/aws_lab_web:latest'
-           ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@ec2-44-211-125-30.compute-1.amazonaws.com 'docker stop aws_lab_web_1'
-           ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@ec2-44-211-125-30.compute-1.amazonaws.com 'docker rm aws_lab_web_1'
-           ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@ec2-44-211-125-30.compute-1.amazonaws.com 'docker run -d --name aws_lab_web_1 -p 80:80 sashkoklapan/aws_lab_web:latest'
+
+      - name: Deploy to AWS EC2 Instance
+        run: |
+          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@ec2-44-211-125-30.compute-1.amazonaws.com 'docker pull sashkoklapan/aws_lab_web:latest'
+          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@ec2-44-211-125-30.compute-1.amazonaws.com 'docker stop aws_lab_web_1'
+          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@ec2-44-211-125-30.compute-1.amazonaws.com 'docker rm aws_lab_web_1'
+          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@ec2-44-211-125-30.compute-1.amazonaws.com 'docker run -d --name aws_lab_web_1 -p 80:80 sashkoklapan/aws_lab_web:latest'
