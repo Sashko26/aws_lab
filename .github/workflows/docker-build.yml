@@ -26,8 +26,8 @@ jobs:
           context: .
           push: true
           tags: sashkoklapan/aws_lab_web:latest
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          username: sashkoklapan
+          password: dckr_pat_Nt954C3PriO4N9Xwd_PxaHYVwCM
 
       - name: Deploy to AWS EC2 Instance
         run: |
