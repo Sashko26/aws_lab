@@ -67,6 +67,7 @@ jobs:
           aws-access-key-id: AKIARG6QCKANY37TZBIJ
           aws-secret-access-key: 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
           aws-region: us-east-1
+          
        - name: Deploy to AWS EC2 Instance
          run: |
            ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@ec2-44-211-125-30.compute-1.amazonaws.com 'docker pull sashkoklapan/aws_lab_web:latest'
