@@ -71,6 +71,7 @@ jobs:
       - name: Deploy to AWS EC2 Instance
         run: |
           ls "/home/runner/work/aws_lab/aws_lab"
+          chmod 400 "/home/runner/work/aws_lab/aws_lab/last1.pem"
           sudo ssh -i "/home/runner/work/aws_lab/aws_lab/last1.pem" ubuntu@ec2-44-211-125-30.compute-1.amazonaws.com 'docker pull sashkoklapan/aws_lab_web:latest'
           sudo ssh -i "/home/runner/work/aws_lab/aws_lab/last1.pem" ubuntu@ec2-44-211-125-30.compute-1.amazonaws.com 'docker stop aws_lab_web_1'
           sudo ssh -i "/home/runner/work/aws_lab/aws_lab/last1.pem" ubuntu@ec2-44-211-125-30.compute-1.amazonaws.com 'docker rm aws_lab_web_1'
