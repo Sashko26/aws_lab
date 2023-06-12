@@ -19,7 +19,6 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
-          audience: sts.amazonaws.com
 
       - name: Build and Publish Docker Image
         uses: docker/build-push-action@v2
@@ -27,10 +26,12 @@ jobs:
           context: .
           push: true
           tags: sashkoklapan/aws_lab_web:latest
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Deploy to AWS EC2 Instance
         run: |
-          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@44.211.125.30 'docker pull sashkoklapan/aws_lab_web:latest'
-          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@44.211.125.30 'docker stop aws_lab_web_1'
-          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@44.211.125.30 'docker rm aws_lab_web_1'
-          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@44.211.125.30 'docker run -d -p 80:80 --name aws_lab_web_1 sashkoklapan/aws_lab_web:latest'
+          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@ec2-44-211-125-30.compute-1.amazonaws.com 'docker pull sashkoklapan/aws_lab_web:latest'
+          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@ec2-44-211-125-30.compute-1.amazonaws.com 'docker stop aws_lab_web_1'
+          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@ec2-44-211-125-30.compute-1.amazonaws.com 'docker rm aws_lab_web_1'
+          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@ec2-44-211-125-30.compute-1.amazonaws.com 'docker run -d --name aws_lab_web_1 -p 80:80 sashkoklapan/aws_lab_web:latest'
